@@ -19,9 +19,9 @@ int Client::readFromSocket()
 void Client::createSocketAndLogIn()
 {
     //TODO
-    addrinfo objAddrInfo;
-    objAddrInfo.ai_family = AF_INET;
-    objAddrInfo.ai_socktype = SOCK_STREAM;
+    addrinfo AddrInfo;
+    AddrInfo.ai_family = AF_INET;
+    AddrInfo.ai_socktype = SOCK_STREAM;
     // objAddrInfo.ai_addr = ;
     int getaddrinfo(const char IP_ADDRESS, const char PORT,
                     const struct addrinfo *hints, struct addrinfo **res);
