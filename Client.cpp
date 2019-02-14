@@ -1,8 +1,8 @@
 #include "Client.h"
 #include <string>
 
-const std::string IP_ADDRESS = "52.58.97.202";
-const std::string PORT = "5378";
+const std::string ip_adress = "52.58.97.202";
+const std::string port = "5378";
 
 void Client::tick(){};
 
@@ -19,11 +19,11 @@ int Client::readFromSocket()
 void Client::createSocketAndLogIn()
 {
     //TODO
-    addrinfo objAddrInfo;
-    objAddrInfo.ai_family = AF_INET;
-    objAddrInfo.ai_socktype = SOCK_STREAM;
+    addrinfo AddrInfo;
+    AddrInfo.ai_family = AF_INET;
+    AddrInfo.ai_socktype = SOCK_STREAM;
     // objAddrInfo.ai_addr = ;
-    int getaddrinfo(const char IP_ADDRESS, const char PORT,
+    int getaddrinfo(const char ip_adress, const char port,
                     const struct addrinfo *hints, struct addrinfo **res);
 };
 
