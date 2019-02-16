@@ -27,6 +27,14 @@ void Client::createSocketAndLogIn()
 
     int getaddrinfo(const char IP_ADDRESS, const char PORT,
                     const struct addrinfo AddrInfo, struct addrinfo **res);
+
+    socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 };
 
 void Client::closeSocket(){};
+
+int main()
+{
+
+    return 0;
+}
