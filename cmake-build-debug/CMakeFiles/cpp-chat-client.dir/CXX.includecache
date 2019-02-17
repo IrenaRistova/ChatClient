@@ -1,0 +1,58 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Application.h
+
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/CircularLineBuffer.h
+cstdlib
+-
+string
+-
+mutex
+-
+
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Client.cpp
+Client.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Client.h
+vusocket.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/vusocket.h
+string
+-
+
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Client.h
+pthread.h
+-
+thread
+-
+string.h
+-
+Application.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Application.h
+vusocket.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/vusocket.h
+CircularLineBuffer.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/CircularLineBuffer.h
+
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/vusocket.h
+iostream
+-
+winsock2.h
+-
+Ws2tcpip.h
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+netdb.h
+-
+unistd.h
+-
+errno.h
+-
+
