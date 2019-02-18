@@ -8,20 +8,17 @@ const char *PORT_STR = "5378";
 const char *name = "Serghei";
 #define DEFAULT_BUFLEN 512
 
-void Client::tick(){};
+void Client::tick() {};
 
-int Client::readFromStdin()
-{
+int Client::readFromStdin() {
     return 0;
 };
 
-int Client::readFromSocket()
-{
+int Client::readFromSocket() {
     return 0;
 };
 
-void Client::createSocketAndLogIn()
-{
+void Client::createSocketAndLogIn() {
     WORD wVersionRequested;
     WSADATA wsaData;
     int err;
@@ -29,17 +26,14 @@ void Client::createSocketAndLogIn()
     wVersionRequested = MAKEWORD(2, 2);
 
     err = WSAStartup(wVersionRequested, &wsaData);
-    if (err != 0)
-    {
+    if (err != 0) {
         printf("WSAStartup failed with error: %d\n", err);
     }
 
-    if (LOBYTE(wsaData.wVersion) != 2 || HIBYTE(wsaData.wVersion) != 2)
-    {
+    if (LOBYTE(wsaData.wVersion) != 2 || HIBYTE(wsaData.wVersion) != 2) {
         printf("Could not find a usable version of Winsock.dll\n");
         WSACleanup();
-    }
-    else
+    } else
         printf("The Winsock 2.2 dll was found okay\n");
 
     int iResult;
@@ -54,14 +48,12 @@ void Client::createSocketAndLogIn()
 
     if (sock == INVALID_SOCKET)
         wprintf(L"socket function failed with error = %d\n", WSAGetLastError());
-    else
-    {
+    else {
         wprintf(L"socket function succeeded\n");
 
-        iResult = connect(sock, (SOCKADDR *)&address, sizeof(address));
+        iResult = connect(sock, (SOCKADDR *) &address, sizeof(address));
 
-        if (iResult == SOCKET_ERROR)
-        {
+        if (iResult == SOCKET_ERROR) {
             wprintf(L"connect function failed with error: %ld\n", WSAGetLastError());
             iResult = closesocket(sock);
             if (iResult == SOCKET_ERROR)
@@ -71,15 +63,15 @@ void Client::createSocketAndLogIn()
         wprintf(L"Connected to server.\n");
     }
 
+
     int recvbuflen = DEFAULT_BUFLEN;
     char *sendbuf = "HELLO-FROM Serghei \n ";
     char recvbuf[DEFAULT_BUFLEN] = "";
 
     //----------------------
     // Send an initial buffer
-    iResult = send(sock, sendbuf, (int)strlen(sendbuf), 0);
-    if (iResult == SOCKET_ERROR)
-    {
+    iResult = send(sock, sendbuf, (int) strlen(sendbuf), 0);
+    if (iResult == SOCKET_ERROR) {
         wprintf(L"send failed with error: %d\n", WSAGetLastError());
         closeSocket();
     }
@@ -88,24 +80,21 @@ void Client::createSocketAndLogIn()
     std::cout << sendbuf << std::endl;
 
     iResult = recv(sock, recvbuf, recvbuflen, 0);
-    if (iResult > 0)
-    {
+    if (iResult > 0) {
         wprintf(L"Bytes received: %d\n", iResult);
         std::cout << recvbuf << std::endl;
-    }
-    else if (iResult == 0)
+    } else if (iResult == 0)
         wprintf(L"Connection closed\n");
     else
         wprintf(L"recv failed with error: %d\n", WSAGetLastError());
+
 };
 
-void Client::closeSocket()
-{
+void Client::closeSocket() {
     std::cout << "outro" << std::endl;
     int iResult;
     iResult = closesocket(sock);
-    if (iResult == SOCKET_ERROR)
-    {
+    if (iResult == SOCKET_ERROR) {
         wprintf(L"closesocket failed with error = %d\n", WSAGetLastError());
     }
 
