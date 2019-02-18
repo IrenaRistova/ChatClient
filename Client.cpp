@@ -5,10 +5,25 @@
 const char *IP_ADDRESS = "52.58.97.202";
 const int PORT = 5378;
 const char *PORT_STR = "5378";
-const char *name = "Serghei";
 #define DEFAULT_BUFLEN 512
 
-void Client::tick() {};
+void Client::tick() {
+    std::string command;
+    std::cin >> command;
+
+    if (command == "!quit") {
+        this->stopApplication();
+    } else if (command == "!who") {
+        this->who();
+    } else if (command[0] == '@') {
+        std::string username = command.substr(1,username.size());
+        std::string messageText;
+        std::cin >> messageText;
+        message(username, messageText);
+    } else if (command == "!delivery") {
+        delivery();
+    }
+};
 
 int Client::readFromStdin() {
     return 0;
@@ -18,7 +33,34 @@ int Client::readFromSocket() {
     return 0;
 };
 
-void Client::createSocketAndLogIn() {
+void Client::sendReq(std::string sendbuf) {
+    int iResult;
+    iResult = send(sock, sendbuf.c_str(), sendbuf.size(), 0);
+    if (iResult == SOCKET_ERROR) {
+        wprintf(L"send failed with error: %d\n", WSAGetLastError());
+        closeSocket();
+    }
+
+    printf("Bytes Sent: %d\n", iResult);
+    std::cout << sendbuf << std::endl;
+}
+
+int Client::receive(std::string &recvbuf) {
+    int iResult;
+    iResult = recv(sock, &recvbuf.at(0), DEFAULT_BUFLEN, 0);
+
+    if (iResult > 0) {
+        wprintf(L"Bytes received: %d\n", iResult);
+        std::cout << recvbuf << std::endl;
+    } else if (iResult == 0)
+        wprintf(L"Connection closed\n");
+    else
+        wprintf(L"recv failed with error: %d\n", WSAGetLastError());
+
+    return iResult;
+}
+
+void Client::createSocket() {
     WORD wVersionRequested;
     WSADATA wsaData;
     int err;
@@ -36,9 +78,9 @@ void Client::createSocketAndLogIn() {
     } else
         printf("The Winsock 2.2 dll was found okay\n");
 
-    int iResult;
-
     sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+
+    int iResult;
 
     struct sockaddr_in address;
 
@@ -62,38 +104,67 @@ void Client::createSocketAndLogIn() {
 
         wprintf(L"Connected to server.\n");
     }
+}
 
+void Client::logIn(std::string name) {
+    std::cout << "Trying to log in" << std::endl;
 
-    int recvbuflen = DEFAULT_BUFLEN;
-    char *sendbuf = "HELLO-FROM Serghei \n ";
-    char recvbuf[DEFAULT_BUFLEN] = "";
+    std::string request = "HELLO-FROM ";
+    int iResult;
+    std::string recvbuf;
+    recvbuf.resize(DEFAULT_BUFLEN);
 
-    //----------------------
-    // Send an initial buffer
-    iResult = send(sock, sendbuf, (int) strlen(sendbuf), 0);
-    if (iResult == SOCKET_ERROR) {
-        wprintf(L"send failed with error: %d\n", WSAGetLastError());
-        closeSocket();
+    sendReq(request + name + "\n");
+    receive(recvbuf);
+
+    if (recvbuf.find("HELLO Serghei") < recvbuf.size()) {
+        std::cout << "Hand-shake ok" << std::endl;
+    } else if (recvbuf.find("IN-USE") < recvbuf.size()) {
+        std::cout << "Name taken" << std::endl;
+        name += '0';
+        logIn(name);
+        return;
+    } else if (recvbuf.find("BUSY") < recvbuf.size()) {
+        std::cout << "Server busy" << std::endl;
+        logIn(name);
+        return;
     }
+}
 
-    printf("Bytes Sent: %d\n", iResult);
-    std::cout << sendbuf << std::endl;
 
-    iResult = recv(sock, recvbuf, recvbuflen, 0);
-    if (iResult > 0) {
-        wprintf(L"Bytes received: %d\n", iResult);
-        std::cout << recvbuf << std::endl;
-    } else if (iResult == 0)
-        wprintf(L"Connection closed\n");
-    else
-        wprintf(L"recv failed with error: %d\n", WSAGetLastError());
-
+void Client::createSocketAndLogIn() {
+    name = "Serghei1";
+    createSocket();
+    logIn(name);
 };
 
+void Client::who() {
+    int iResult;
+    std::string recvbuf;
+    recvbuf.resize(DEFAULT_BUFLEN);
+
+    sendReq("WHO\n");
+    receive(recvbuf);
+}
+
+void Client::message(std::string user, std::string message) {
+    std::string recvbuf;
+    recvbuf.resize(DEFAULT_BUFLEN);
+
+    sendReq("SEND "+user+" "+name+": "+message+"\n");
+    receive(recvbuf);
+}
+
+void Client::delivery() {
+    std::string recvbuf;
+    recvbuf.resize(DEFAULT_BUFLEN);
+    receive(recvbuf);
+}
+
 void Client::closeSocket() {
-    std::cout << "outro" << std::endl;
     int iResult;
     iResult = closesocket(sock);
+
     if (iResult == SOCKET_ERROR) {
         wprintf(L"closesocket failed with error = %d\n", WSAGetLastError());
     }

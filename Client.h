@@ -23,6 +23,7 @@ private:
      * Please do not remove the ones that are already here.
      */
     SOCKET sock;
+    std::string name;
     std::thread socketThread, stdinThread;
     CircularLineBuffer socketBuffer, stdinBuffer;
 
@@ -65,6 +66,10 @@ private:
         }
     }
 
+    void createSocket();
+
+    void logIn(std::string name);
+
     void createSocketAndLogIn();
 
     void closeSocket();
@@ -79,6 +84,16 @@ private:
         socketThread.join();
         stdinThread.join();
     }
+
+    void who();
+
+    void message(std::string user, std::string message);
+
+    void delivery();
+
+    void sendReq(std::string sendbuf);
+
+    int receive(std::string& recvbuf);
 
 public:
     inline ~Client() override {
