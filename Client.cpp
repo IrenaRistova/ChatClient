@@ -117,11 +117,11 @@ void Client::logIn(std::string name) {
     sendReq(request + name + "\n");
     receive(recvbuf);
 
-    if (recvbuf.find("HELLO Serghei") < recvbuf.size()) {
+    if (recvbuf.find("HELLO ") < recvbuf.size()) {
         std::cout << "Hand-shake ok" << std::endl;
     } else if (recvbuf.find("IN-USE") < recvbuf.size()) {
         std::cout << "Name taken" << std::endl;
-        name += '0';
+        std::cin >> name;
         logIn(name);
         return;
     } else if (recvbuf.find("BUSY") < recvbuf.size()) {
@@ -133,7 +133,7 @@ void Client::logIn(std::string name) {
 
 
 void Client::createSocketAndLogIn() {
-    name = "Serghei1";
+    std::cin >> name;
     createSocket();
     logIn(name);
 };
