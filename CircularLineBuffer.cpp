@@ -1,34 +1,56 @@
+//
+// Created by Gebruiker on 22/02/2019.
+//
 
 #include "CircularLineBuffer.h"
+bool CircularLineBuffer::_writeChars(const char *chars, size_t nchars) {
+    if (nchars > freeSpace() || nchars == 0) {
+        return false;
+    }
 
-int CircularLineBuffer::freeSpace() {
-    return 0;
+    int begin = nextFreeIndex();
+    for (int i = 0; i < nchars; i++) {
+        buffer[(begin+i)%bufferSize] = chars[i];
+    }
+
+    count += nchars;
+    return true;
 }
 
-bool CircularLineBuffer::isFull() {
-    return false;
-}
+std::string CircularLineBuffer::_readLine() {
+    if (hasLine()) {
+        std::string result;
+        int end = findNewline();
 
-bool CircularLineBuffer::isEmpty() {
-    return false;
-}
+        result.resize(abs(end-start));
 
-int CircularLineBuffer::nextFreeIndex() {
-    return 0;
+        for (int i = 0; i < abs(end-start); i++) {
+            result[i] = buffer[(start+i)%bufferSize];
+//            std::cout << buffer[(start+i)%bufferSize] << std::endl;
+        }
+
+
+        count -= end+1-start;
+        start = end+1;
+        return result;
+    } else {
+        return "";
+    }
 }
 
 int CircularLineBuffer::findNewline() {
-    return 0;
+    int i = 0;
+    while (buffer[(i+start)%bufferSize] != '\n') {
+        i++;
+        if (i >= count) {
+            return -1;
+        }
+    }
+
+    return start+i;
 }
 
 bool CircularLineBuffer::hasLine() {
-    return false;
+    return findNewline() >= 0;
 }
 
-bool CircularLineBuffer::writeChars(const char *chars, size_t nchars) {
-    return false;
-}
-
-std::string CircularLineBuffer::readLine() {
-    return nullptr;
-}

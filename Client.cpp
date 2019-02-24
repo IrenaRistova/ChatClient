@@ -5,60 +5,56 @@
 const char *IP_ADDRESS = "52.58.97.202";
 const int PORT = 5378;
 const char *PORT_STR = "5378";
-#define DEFAULT_BUFLEN 512
+#define DEFAULT_BUFLEN 4096
 
 void Client::tick() {
-    std::string command;
-    std::cin >> command;
+    if (stdinBuffer.hasLine()) {
+        std::string message = stdinBuffer.readLine();
+        message+= '\n';
+        std::cout << "sent: "  << message << std::endl;
+        send(sock, message.c_str(), message.size(), 0);
+    }
 
-    if (command == "!quit") {
-        this->stopApplication();
-    } else if (command == "!who") {
-        this->who();
-    } else if (command[0] == '@') {
-        std::string username = command.substr(1,username.size());
-        std::string messageText;
-        std::cin >> messageText;
-        message(username, messageText);
-    } else if (command == "!delivery") {
-        delivery();
+    if (socketBuffer.hasLine()) {
+        std::cout << "Received: " << socketBuffer.readLine() << std::endl;
     }
 };
 
 int Client::readFromStdin() {
-    return 0;
+    std::string input;
+    std::getline(std::cin, input);
+    if (input.size() == 0) {
+        return 0;
+    }
+
+    if (input == "!exit") {
+        return -1;
+    } else if (input == "!quit") {
+        this->stopApplication();
+        return 0;
+    } else if (input == "!who") {
+        input = "WHO";
+    } else if (input[0] == '@') {
+        input = input.substr(1, input.size());
+        input = "SEND " + input;
+    }
+
+    input += '\n';
+    stdinBuffer.writeChars(input.c_str(), input.size());
+    return input.size();
 };
 
 int Client::readFromSocket() {
-    return 0;
-};
-
-void Client::sendReq(std::string sendbuf) {
-    int iResult;
-    iResult = send(sock, sendbuf.c_str(), sendbuf.size(), 0);
-    if (iResult == SOCKET_ERROR) {
-        wprintf(L"send failed with error: %d\n", WSAGetLastError());
-        closeSocket();
-    }
-
-    printf("Bytes Sent: %d\n", iResult);
-    std::cout << sendbuf << std::endl;
-}
-
-int Client::receive(std::string &recvbuf) {
-    int iResult;
-    iResult = recv(sock, &recvbuf.at(0), DEFAULT_BUFLEN, 0);
-
-    if (iResult > 0) {
-        wprintf(L"Bytes received: %d\n", iResult);
-        std::cout << recvbuf << std::endl;
-    } else if (iResult == 0)
-        wprintf(L"Connection closed\n");
-    else
+    std::string recvbuf;
+    recvbuf.resize(DEFAULT_BUFLEN);
+    int numbytes = recv(sock, &recvbuf.at(0), DEFAULT_BUFLEN, 0);
+    if (numbytes > 0) {
+        socketBuffer.writeChars(recvbuf.c_str(), numbytes);
+    } else if (numbytes < 0) {
         wprintf(L"recv failed with error: %d\n", WSAGetLastError());
-
-    return iResult;
-}
+    }
+    return numbytes;
+};
 
 void Client::createSocket() {
     WORD wVersionRequested;
@@ -106,59 +102,8 @@ void Client::createSocket() {
     }
 }
 
-void Client::logIn(std::string name) {
-    std::cout << "Trying to log in" << std::endl;
-
-    std::string request = "HELLO-FROM ";
-    int iResult;
-    std::string recvbuf;
-    recvbuf.resize(DEFAULT_BUFLEN);
-
-    sendReq(request + name + "\n");
-    receive(recvbuf);
-
-    if (recvbuf.find("HELLO ") < recvbuf.size()) {
-        std::cout << "Hand-shake ok" << std::endl;
-    } else if (recvbuf.find("IN-USE") < recvbuf.size()) {
-        std::cout << "Name taken" << std::endl;
-        std::cin >> name;
-        logIn(name);
-        return;
-    } else if (recvbuf.find("BUSY") < recvbuf.size()) {
-        std::cout << "Server busy" << std::endl;
-        logIn(name);
-        return;
-    }
-}
-
-
 void Client::createSocketAndLogIn() {
-    std::cin >> name;
     createSocket();
-    logIn(name);
-};
-
-void Client::who() {
-    int iResult;
-    std::string recvbuf;
-    recvbuf.resize(DEFAULT_BUFLEN);
-
-    sendReq("WHO\n");
-    receive(recvbuf);
-}
-
-void Client::message(std::string user, std::string message) {
-    std::string recvbuf;
-    recvbuf.resize(DEFAULT_BUFLEN);
-
-    sendReq("SEND "+user+" "+name+": "+message+"\n");
-    receive(recvbuf);
-}
-
-void Client::delivery() {
-    std::string recvbuf;
-    recvbuf.resize(DEFAULT_BUFLEN);
-    receive(recvbuf);
 }
 
 void Client::closeSocket() {

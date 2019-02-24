@@ -35,16 +35,37 @@ private:
     void tick() override;
 
     /**
-     * Assignment 4
-     *
-     * See the lab manual for the assignment description.
-     */
+ * Assignment 4
+ *
+ * This method reads data from the standard input and writes it into the 'stdinBuffer'.
+ * This method is called repeatedly, which means you don't need to add a loop yourself.
+ * After implementation, it should look something like this:
+ *
+ * std::string input = [read string from stdin];
+ * stdinBuffer.writeChars([change string to char array], [number of elements]);
+ *
+ * Make sure that you also write newline (\n) characters into the stdinBuffer,
+ * otherwise stdinBuffer.readLine() will never return a line.
+ *
+ * See the lab manual for more details.
+ *
+ * @return Returns -1 if the user writes '!exit', returns the number of characters read otherwise.
+ */
     int readFromStdin();
 
     /**
      * Assignment 4
      *
-     * See the lab manual for the assignment description.
+     * This method reads data from 'sock' and writes it into 'socketBuffer'.
+     * This method is called repeatedly, which means you don't need to add a loop yourself.
+     * After implementation, it should look something like this:
+     *
+     * int numbytes = recv([socket], [buffer], [buffer size], 0);
+     * socketBuffer.writeChars([buffer], numbytes);
+     *
+     * See the lab manual for more details.
+     *
+     * #return Return the return value of 'recv'.
      */
     int readFromSocket();
 
@@ -84,16 +105,6 @@ private:
         socketThread.join();
         stdinThread.join();
     }
-
-    void who();
-
-    void message(std::string user, std::string message);
-
-    void delivery();
-
-    void sendReq(std::string sendbuf);
-
-    int receive(std::string& recvbuf);
 
 public:
     inline ~Client() override {
