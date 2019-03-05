@@ -6,13 +6,9 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Application.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/Application.h
 
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/CircularLineBuffer.cpp
-CircularLineBuffer.h
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/CircularLineBuffer.h
-
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/CircularLineBuffer.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/CircularLineBuffer.h
 cstdlib
 -
 string
@@ -20,15 +16,15 @@ string
 mutex
 -
 
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Client.cpp
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/Client.cpp
 Client.h
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Client.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/Client.h
 vusocket.h
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/vusocket.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/vusocket.h
 string
 -
 
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Client.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/Client.h
 pthread.h
 -
 thread
@@ -36,19 +32,13 @@ thread
 string.h
 -
 Application.h
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Application.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/Application.h
 vusocket.h
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/vusocket.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/vusocket.h
 CircularLineBuffer.h
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/CircularLineBuffer.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/CircularLineBuffer.h
 
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/main.cpp
-iostream
--
-Client.h
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Client.h
-
-C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/vusocket.h
+C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/vusocket.h
 iostream
 -
 winsock2.h

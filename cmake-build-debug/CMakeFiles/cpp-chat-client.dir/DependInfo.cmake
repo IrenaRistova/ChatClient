@@ -4,11 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Application.cpp" "C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/Application.cpp.obj"
-  "C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/CircularLineBuffer.cpp" "C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/CircularLineBuffer.cpp.obj"
-  "C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/Client.cpp" "C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/Client.cpp.obj"
-  "C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/main.cpp" "C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/main.cpp.obj"
-  "C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/vusocket.cpp" "C:/Users/Gebruiker/Desktop/VU/Computer Networks/assignment1/ChatClient/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/vusocket.cpp.obj"
+  "C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/Application.cpp" "C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/Application.cpp.obj"
+  "C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/CircularLineBuffer.cpp" "C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/CircularLineBuffer.cpp.obj"
+  "C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/Client.cpp" "C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/Client.cpp.obj"
+  "C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/main.cpp" "C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/main.cpp.obj"
+  "C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/vusocket.cpp" "C:/Users/Gebruiker/Desktop/VU/Computer Networks/ChatClientUDPv2/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/vusocket.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

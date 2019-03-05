@@ -3,19 +3,23 @@
 #include <string>
 
 const char *IP_ADDRESS = "52.58.97.202";
-const int PORT = 5378;
-const char *PORT_STR = "5378";
+const int PORT = 5382;
+const char *PORT_STR = "5382";
 #define DEFAULT_BUFLEN 4096
+struct sockaddr_in address;
 
 void Client::tick() {
-    if (stdinBuffer.hasLine()) {
+    while (stdinBuffer.hasLine()) {
         std::string message = stdinBuffer.readLine();
-        message+= '\n';
+        message+= "\n";
         std::cout << "sent: "  << message << std::endl;
-        send(sock, message.c_str(), message.size(), 0);
+        int iResult = send(sock, message.c_str(), message.size(), 0);
+        if (iResult == SOCKET_ERROR) {
+            wprintf(L"send failed with error: %d\n", WSAGetLastError());
+        }
     }
 
-    if (socketBuffer.hasLine()) {
+    while (socketBuffer.hasLine()) {
         std::cout << "Received: " << socketBuffer.readLine() << std::endl;
     }
 };
@@ -48,6 +52,13 @@ int Client::readFromSocket() {
     std::string recvbuf;
     recvbuf.resize(DEFAULT_BUFLEN);
     int numbytes = recv(sock, &recvbuf.at(0), DEFAULT_BUFLEN, 0);
+
+    if (recvbuf.find("IN-USE") == 0) {
+        createSocketAndLogIn();
+
+        std::cout << "Please choose another name: " << std::endl;
+        return 0;
+    }
     if (numbytes > 0) {
         socketBuffer.writeChars(recvbuf.c_str(), numbytes);
     } else if (numbytes < 0) {
@@ -57,28 +68,11 @@ int Client::readFromSocket() {
 };
 
 void Client::createSocket() {
-    WORD wVersionRequested;
-    WSADATA wsaData;
-    int err;
+    sock_init();
 
-    wVersionRequested = MAKEWORD(2, 2);
-
-    err = WSAStartup(wVersionRequested, &wsaData);
-    if (err != 0) {
-        printf("WSAStartup failed with error: %d\n", err);
-    }
-
-    if (LOBYTE(wsaData.wVersion) != 2 || HIBYTE(wsaData.wVersion) != 2) {
-        printf("Could not find a usable version of Winsock.dll\n");
-        WSACleanup();
-    } else
-        printf("The Winsock 2.2 dll was found okay\n");
-
-    sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
     int iResult;
-
-    struct sockaddr_in address;
 
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = inet_addr(IP_ADDRESS);
