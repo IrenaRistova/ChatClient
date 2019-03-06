@@ -203,6 +203,33 @@ Client.cpp.s:
 	$(MAKE) -f CMakeFiles\cpp-chat-client.dir\build.make CMakeFiles/cpp-chat-client.dir/Client.cpp.s
 .PHONY : Client.cpp.s
 
+Server.obj: Server.cpp.obj
+
+.PHONY : Server.obj
+
+# target to build an object file
+Server.cpp.obj:
+	$(MAKE) -f CMakeFiles\cpp-chat-client.dir\build.make CMakeFiles/cpp-chat-client.dir/Server.cpp.obj
+.PHONY : Server.cpp.obj
+
+Server.i: Server.cpp.i
+
+.PHONY : Server.i
+
+# target to preprocess a source file
+Server.cpp.i:
+	$(MAKE) -f CMakeFiles\cpp-chat-client.dir\build.make CMakeFiles/cpp-chat-client.dir/Server.cpp.i
+.PHONY : Server.cpp.i
+
+Server.s: Server.cpp.s
+
+.PHONY : Server.s
+
+# target to generate assembly for a file
+Server.cpp.s:
+	$(MAKE) -f CMakeFiles\cpp-chat-client.dir\build.make CMakeFiles/cpp-chat-client.dir/Server.cpp.s
+.PHONY : Server.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -275,6 +302,9 @@ help:
 	@echo ... Client.obj
 	@echo ... Client.i
 	@echo ... Client.s
+	@echo ... Server.obj
+	@echo ... Server.i
+	@echo ... Server.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

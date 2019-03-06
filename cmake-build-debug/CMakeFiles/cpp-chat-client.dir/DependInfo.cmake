@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Application.cpp" "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/Application.cpp.obj"
   "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/CircularLineBuffer.cpp" "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/CircularLineBuffer.cpp.obj"
   "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Client.cpp" "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/Client.cpp.obj"
+  "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Server.cpp" "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/Server.cpp.obj"
   "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/main.cpp" "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/main.cpp.obj"
   "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/vusocket.cpp" "C:/Users/User/Desktop/Comp Networks/cpp-chat-client/cmake-build-debug/CMakeFiles/cpp-chat-client.dir/vusocket.cpp.obj"
   )

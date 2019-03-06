@@ -16,15 +16,15 @@ string
 mutex
 -
 
-C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Client.cpp
-Client.h
-C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Client.h
+C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Server.cpp
 vusocket.h
 C:/Users/User/Desktop/Comp Networks/cpp-chat-client/vusocket.h
+Server.h
+C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Server.h
 string
 -
 
-C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Client.h
+C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Server.h
 pthread.h
 -
 thread

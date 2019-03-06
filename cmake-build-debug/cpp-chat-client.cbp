@@ -98,6 +98,12 @@
 		<Unit filename="C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Client.h">
 			<Option target="cpp-chat-client"/>
 		</Unit>
+		<Unit filename="C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Server.cpp">
+			<Option target="cpp-chat-client"/>
+		</Unit>
+		<Unit filename="C:/Users/User/Desktop/Comp Networks/cpp-chat-client/Server.h">
+			<Option target="cpp-chat-client"/>
+		</Unit>
 		<Unit filename="C:/Users/User/Desktop/Comp Networks/cpp-chat-client/main.cpp">
 			<Option target="cpp-chat-client"/>
 		</Unit>
